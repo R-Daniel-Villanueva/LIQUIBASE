@@ -1,4 +1,4 @@
-#R-Daniel-Villanueva practica LIQUIBASE
+# R-Daniel-Villanueva practica LIQUIBASE
 
 ## Liquibase
 ## Source Control for your database
