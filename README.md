@@ -1,5 +1,9 @@
 # R-Daniel-Villanueva practica LIQUIBASE
 
+## Git flow rules YEA
+
+
+
 ## Liquibase
 ## Source Control for your database
 
