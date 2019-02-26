@@ -98,6 +98,6 @@
                 schemaName="public"
                 tableName="function_role_user"/>
     </changeSet>
-<!--C-->
+<!--C--> 
 
 </databaseChangeLog> 
