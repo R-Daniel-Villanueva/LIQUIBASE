@@ -1,5 +1,10 @@
 # R-Daniel-Villanueva practica LIQUIBASE
 
+## Git flow rules YEA
+## Corregi mi error XD
+
+
+
 ## Liquibase
 ## Source Control for your database
 
