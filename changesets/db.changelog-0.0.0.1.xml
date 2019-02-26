@@ -8,12 +8,18 @@
 <!--ADDRESS-->      
     <changeSet author="R.ALBERTO" id="25022019-0001">
         <createTable tableName="address">
-            <column name="idaddress" type="int">
+            <column name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
             </column>
             <column name="street" type="VARCHAR(50)">
             </column>
             <column name="number" type="VARCHAR(10)">
+            </column>
+            <column name="city" type="VARCHAR(10)">
+            </column>
+            <column name="state" type="VARCHAR(10)">
+            </column>
+            <column name="country" type="VARCHAR(10)">
             </column>
             <column name="CP" type="VARCHAR(50)">
             </column>
@@ -22,7 +28,7 @@
 <!--USER-->      
     <changeSet author="R.ALBERTO" id="25022019-0002">
         <createTable tableName="user">
-            <column name="iduser" type="int">
+            <column name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
             </column>
             <column name="name" type="VARCHAR(50)">
@@ -31,56 +37,67 @@
             </column>
             <column name="age" type="int">
             </column>
-            <column name="fkaddress" type="int">
+            <column name="adress_id" type="int">
+            </column>
+            <column name="username" type="VARCHAR(50)">
+            </column>
+            <column name="password" type="VARCHAR(50)">
             </column>
         </createTable>
     </changeSet>
 <!--C-->
     <changeSet author="R.ALBERTO" id="25022019-0003">
-        <addForeignKeyConstraint baseColumnNames="fkaddress"
+        <addForeignKeyConstraint baseColumnNames="adress_id"
                 baseTableName="user"
                 constraintName="fk_user_address"
-                referencedColumnNames="idaddress"
+                referencedColumnNames="id"
                 referencedTableName="address"/>
     </changeSet>
 <!--PERMISSIONS-->      
     <changeSet author="R.ALBERTO" id="25022019-0004">
-        <createTable tableName="permissions">
-            <column name="idpermissions" type="int">
+        <createTable tableName="role">
+            <column name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
             </column>
-            <column name="name" type="VARCHAR(50)">
+            <column name="type" type="VARCHAR(50)">
             </column>
-            <column name="desc_permissions" type="VARCHAR(50)">
+            <column name="permissions" type="VARCHAR(255)">
             </column>
         </createTable>
     </changeSet>
-    <!--USER_PERMISSIONS-->      
+    <!--FUNCTION_ROLE_USER-->      
     <changeSet author="R.ALBERTO" id="25022019-0005">
-        <createTable tableName="user_permissions">
-            <column name="fkpermissions" type="int">
-                <constraints nullable="true" primaryKey="true" unique="true"/>
+        <createTable tableName="function_role_user">
+            <column name="role_id" type="int">
             </column>
-            <column name="fkuser" type="int">
-                <constraints nullable="true" primaryKey="true" unique="true"/>
+            <column name="user_id" type="int">
             </column>
         </createTable>
     </changeSet>
 <!--C-->
-    <changeSet author="R.ALBERTO" id="23022019-0006">
-        <addForeignKeyConstraint baseColumnNames="fkpermissions"
-                baseTableName="user_permissions"
-                constraintName="fk_permissions_user_permissions"
-                referencedColumnNames="idpermissions"
-                referencedTableName="permissions"/>
+    <changeSet author="R.ALBERTO" id="25022019-0006">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                baseTableName="function_role_user"
+                constraintName="fk_role"
+                referencedColumnNames="id"
+                referencedTableName="role"/>
     </changeSet>
 <!--C-->
-    <changeSet author="R.ALBERTO" id="23022019-0007">
-        <addForeignKeyConstraint baseColumnNames="fkuser"
-                baseTableName="user_permissions"
-                constraintName="fk_user_user_permissions"
-                referencedColumnNames="iduser"
+    <changeSet author="R.ALBERTO" id="25022019-0007">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                baseTableName="function_role_user"
+                constraintName="fk_user"
+                referencedColumnNames="id"
                 referencedTableName="user"/>
     </changeSet>
+<!--C-->
+    <changeSet author="R.ALBERTO" id="25022019-0008">
+        <addPrimaryKey 
+                columnNames="role_id, user_id"
+                constraintName="pk_userpermissions"
+                schemaName="public"
+                tableName="function_role_user"/>
+    </changeSet>
+<!--C-->
 
 </databaseChangeLog> 
